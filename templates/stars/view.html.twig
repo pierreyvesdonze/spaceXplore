@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="float-right">
+        <a href="{{ path('star_update', {id: star.id}) }}" class="btn btn-primary">
+            Update
+        </a>
+        <a href="{{ path('star_delete', {id: star.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez la suppression !')">
+            Delete
+        </a>
+    </div>
+<img class="card-img-top" src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" alt="Card image cap">
+    
+    <h2>
+        {{ star.name }}
+    </h2>
+
+
+{% endblock %}

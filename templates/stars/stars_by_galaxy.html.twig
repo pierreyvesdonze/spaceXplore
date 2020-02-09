@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<div class="float-right">
+		<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter une étoile</a>
+	</div>
+
+	<h2>{{ 
+		galaxy.name }}</h2>
+
+	<div class="container-cards">
+		{% for id, star in stars %}
+			<div class="card flex-cards">
+
+				<a href=" {{ path("star_view", {"id": star.id}) }} ">
+
+					<img class="card-img-top" src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" alt="Card image cap">
+				</a>
+
+				<div class="card-body">
+					<h5 class="card-title">{{ star.
+					galaxy.name }}
+						{{ star.name }}</h5>
+					<p class="card-text">{{ star.age }}</p>
+
+					<a href=" {{ path('star_update', {'id' : star.id}) }} " class="btn btn-primary">Update</a>
+
+					<a href=" {{ path('star_delete', {'id' : star.id}) }} " class="btn btn-danger" onclick="return confirm('Confirmez la suppression')">Delete</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}

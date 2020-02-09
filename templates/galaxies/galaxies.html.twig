@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<div class="float-right">
+		<a href="{{ path("galaxy_create") }}" class="btn btn-primary">Ajouter une galaxie</a>
+	</div>
+	<div class="container-cards">
+		{% for id, galaxy in galaxies %}
+			<div class="card flex-cards">
+				<div class="card-body">
+					<h5 class="card-title">{{ galaxy.name }}</h5>
+
+					<img class="card-img-top" src="{{ asset('uploads/images/' ~ galaxy.brochureFilename) }}" alt="Card image cap">
+					
+					<a href="{{ path('galaxy_stars_list', {"id": galaxy.id}) }}" class="btn btn-primary">Voir les étoiles</a>
+
+						<a href=" {{ path('galaxy_delete', {'id' : galaxy.id}) }} " class="btn btn-danger" onclick="return confirm('Confirmez la suppression')">Delete</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}
