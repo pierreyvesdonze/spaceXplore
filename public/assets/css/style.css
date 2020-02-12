@@ -1,8 +1,124 @@
+/*SETTINGS*/
+
+/*
+***********************************
+COLORS
+***********************************
+*/
+
+:root {
+    --primary-color: #f0f0f0;
+    --secondary-color: #ff7b00;
+    --hover-secondary-color: #ff7b0015;
+    --background-color-1-opacity-50: #0eddec75;
+    --background-color-1: #0eddec;
+    --font-color-1: white;
+    --font-color-2: #000000;
+    --font-color-3: #0e53a7;
+    ;
+    --font-color-4: #BF4030;
+}
+
+.btn-primary {
+    background-color: var(--background-color-1-opacity-50);
+    filter: drop-shadow(0 0 0.75rem #0eddec);
+}
+.btn-primary:hover {
+    background-color: var(--background-color-1);
+}
+
+.btn {
+    border-radius: 15px;
+}
+
+a, li ,p, h1, h2, h3 {
+    text-shadow: rgb(0, 0, 0) 1px 1px 3px;
+}
+
+
+ul {
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 100% !important;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.carousel-item {
+    display: flex !important;
+    justify-content: center;
+}
+
+
+/*
+***********************************
+HEADER
+***********************************
+*/
+.navbar {
+    background-color: black;
+    margin: 0;
+}
+
+.navbar a {
+    color: var(--primary-color);
+}
+
+/*
+***********************************
+GALAXY
+***********************************
+*/
+
+/*MikyWay*/
+.galaxy-background {
+    position: absolute;
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 720px;
+
+}
+
 .container-cards {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .card-body, .card-img-top {
-    width: 1250px !important;
+    width: 250px !important;
+}
+
+
+html {
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+}
+
+
+/*
+***********************************
+STARS
+***********************************
+*/
+.card {
+    background-color: transparent;
 }

@@ -2,23 +2,53 @@
 
 {% block body %}
 
-	<div class="float-right">
-		<a href="{{ path("galaxy_create") }}" class="btn btn-primary">Ajouter une galaxie</a>
-	</div>
-	<div class="container-cards">
-		{% for id, galaxy in galaxies %}
-			<div class="card flex-cards">
-				<div class="card-body">
-					<h5 class="card-title">{{ galaxy.name }}</h5>
+	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+			<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+		</ol>
 
-					<img class="card-img-top" src="{{ asset('uploads/images/' ~ galaxy.brochureFilename) }}" alt="Card image cap">
-					
-					<a href="{{ path('galaxy_stars_list', {"id": galaxy.id}) }}" class="btn btn-primary">Voir les étoiles</a>
-
-						<a href=" {{ path('galaxy_delete', {'id' : galaxy.id}) }} " class="btn btn-danger" onclick="return confirm('Confirmez la suppression')">Delete</a>
+		<!--ITEM-->
+		<div class="carousel-inner">
+			{% for id, galaxy in galaxies %}
+				<div class="carousel-item active">
+					<img src="{{ asset('uploads/images/' ~ galaxy.brochureFilename) }}" class="" alt="galaxy">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>{{ galaxy.name }}</h5>
+						<p>{{ galaxy.description }}</p>
+						<ul>
+							<li>
+								<span>Age :
+								</span>
+								{{ galaxy.age }}
+								milliards d'années
+							</li>
+							<li>
+								<span>Diamètre :
+								</span>
+								{{ galaxy.size }}
+								années lumière
+							</li>
+							<li>
+								<span>Constellation :
+								</span>
+								{{ galaxy.constellation }}</li>
+						</ul>
+						<a href="{{ path('galaxy_stars_list', {"id": galaxy.id}) }}" class="btn btn-primary">Visiter</a>
+					</div>
 				</div>
-			</div>
-		{% endfor %}
-	</div>
+			{% endfor %}
 
-{% endblock %}
+			<!--CONTROL-->
+			<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+
+	{% endblock %}

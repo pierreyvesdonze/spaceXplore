@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Galaxy;
 use App\Form\Type\GalaxyType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/galaxy")
+ * 
  */
 class GalaxyController extends AbstractController
 {
@@ -34,6 +36,7 @@ class GalaxyController extends AbstractController
 
     /**
      * @Route("/create", name="galaxy_create")
+     * @IsGranted("ROLE_DB_ADMIN")
      */
     public function galaxyCreate(Request $request)
     {
@@ -85,6 +88,7 @@ class GalaxyController extends AbstractController
 
     /**
      * @Route("/{id}/delete", name="galaxy_delete")
+     * @IsGranted("ROLE_DB_ADMIN")
      * 
      */
     public function galaxyDelete(Galaxy $galaxy)

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Galaxy;
 use App\Entity\Star;
 use App\Form\Type\StarType;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/star")
+ * 
  */
 class StarController extends AbstractController
 {
@@ -66,6 +68,7 @@ class StarController extends AbstractController
 
     /**
      * @Route("/create", name="star_create")
+     * @IsGranted("ROLE_USER")
      */
     public function starCreate(Request $request)
     {
@@ -117,6 +120,7 @@ class StarController extends AbstractController
 
      /**
      * @Route("/{id}/update", name="star_update")
+     * @IsGranted("ROLE_USER")
      */
     public function starUpdate(Request $request, Star $star)
     {
@@ -143,6 +147,7 @@ class StarController extends AbstractController
 
     /**
      * @Route("/{id}/delete", name="star_delete")
+     * @IsGranted("ROLE_USER")
      */
     public function starDelete(Star $star)
     {

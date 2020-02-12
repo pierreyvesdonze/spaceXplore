@@ -2,25 +2,27 @@
 
 {% block body %}
 
-	<div class="float-right">
-		<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter une étoile</a>
-	</div>
+	<div class="galaxy-background" style="background-image:url({{ asset('uploads/images/' ~ galaxy.brochureFilename) }}) ">
 
-	<h2>{{ 
+		<div class="float-right">
+			<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter une étoile</a>
+		</div>
+
+		<h2>{{ 
 		galaxy.name }}</h2>
+		<div id='stars'></div>
+		<div id='stars2'></div>
+		<div id='stars3'></div>
 
-	<div class="container-cards">
-		{% for id, star in stars %}
-			<div class="card flex-cards">
-
-				<a href=" {{ path("star_view", {"id": star.id}) }} ">
+		<div class="container-cards">
+			{% for id, star in stars %}
+				<div class="card flex-cards">
 
 					<img class="card-img-top" src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" alt="Card image cap">
 				</a>
 
 				<div class="card-body">
-					<h5 class="card-title">{{ star.
-					galaxy.name }}
+					<h5 class="card-title">
 						{{ star.name }}</h5>
 					<p class="card-text">{{ star.age }}</p>
 
@@ -31,5 +33,4 @@
 			</div>
 		{% endfor %}
 	</div>
-
-{% endblock %}
+</div>{% endblock %}

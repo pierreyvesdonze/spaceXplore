@@ -53,7 +53,7 @@ class StarType extends AbstractType
         );
 
         $builder->add(
-            'type',
+            'masse',
             TextType::class,
             [
                 "label" => "Masse de l'étoile"
