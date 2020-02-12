@@ -1,5 +1,12 @@
 /*SETTINGS*/
 
+
+
+html {
+    height: 100%;
+    overflow: hidden;
+  }
+
 /*
 ***********************************
 COLORS
@@ -52,11 +59,10 @@ ul li {
     padding: 0;
 }
 
-
-
 .carousel-item {
     display: flex !important;
     justify-content: center;
+    flex-direction: column;
 }
 
 
@@ -107,18 +113,39 @@ GALAXY
 }
 
 
-html {
-  height: 100%;
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  overflow: hidden;
-}
-
 
 /*
 ***********************************
 STARS
 ***********************************
 */
+
+
+
 .card {
     background-color: transparent;
+}
+
+.carousel-image {
+    margin: auto;
+}
+
+.carousel-image img {
+    width: 400px;
+    text-align: center !important;
+}   
+
+.carousel-caption {
+    position: sticky !important;
+}
+
+
+/*
+***********************************
+VIEW
+***********************************
+*/
+
+.container-view {
+    display: flex;
 }

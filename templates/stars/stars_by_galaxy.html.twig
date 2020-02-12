@@ -5,32 +5,74 @@
 	<div class="galaxy-background" style="background-image:url({{ asset('uploads/images/' ~ galaxy.brochureFilename) }}) ">
 
 		<div class="float-right">
-			<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter une étoile</a>
+			{% if is_granted("ROLE_USER") %}
+				<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter une étoile</a>
+			{% endif %}
 		</div>
 
-		<h2>{{ 
-		galaxy.name }}</h2>
+		<h2>{{ galaxy.name }}</h2>
 		<div id='stars'></div>
 		<div id='stars2'></div>
 		<div id='stars3'></div>
 
-		<div class="container-cards">
-			{% for id, star in stars %}
-				<div class="card flex-cards">
 
-					<img class="card-img-top" src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" alt="Card image cap">
+		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+				<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+				<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+			</ol>
+
+
+			<!--ITEM-->
+			<div class="carousel-inner">
+				{% for id, star in stars %}
+					<div class="carousel-item active">
+						<div class="carousel-image">
+							<img src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" class="" alt="star">
+						</div>
+
+						<div class="carousel-caption ">
+							<h5 class="card-title">
+								{{ star.name }}</h5>
+							<ul>
+								<li>
+									<span>
+										Âge :
+									</span>
+									{{ star.age }}
+									milliards d'années</li>
+								<li>
+									<span>
+										Type :
+									</span>
+									{{ star.type }}</li>
+								<li>
+									<span>
+										Masse :
+									</span>
+									{{ star.masse }}</li>
+							</ul>
+
+
+							{% if is_granted("ROLE_USER") %}
+								<a href=" {{ path('star_update', {'id' : star.id}) }} " class="btn btn-primary">Update</a>
+
+								<a href=" {{ path('star_delete', {'id' : star.id}) }} " class="btn btn-danger" onclick="return confirm('Confirmez la suppression')">Delete</a>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+
+
+				<!--CONTROL-->
+				<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
 				</a>
-
-				<div class="card-body">
-					<h5 class="card-title">
-						{{ star.name }}</h5>
-					<p class="card-text">{{ star.age }}</p>
-
-					<a href=" {{ path('star_update', {'id' : star.id}) }} " class="btn btn-primary">Update</a>
-
-					<a href=" {{ path('star_delete', {'id' : star.id}) }} " class="btn btn-danger" onclick="return confirm('Confirmez la suppression')">Delete</a>
-				</div>
+				<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
 			</div>
-		{% endfor %}
-	</div>
-</div>{% endblock %}
+		{% endblock %}
