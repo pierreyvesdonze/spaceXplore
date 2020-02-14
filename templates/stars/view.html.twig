@@ -2,34 +2,42 @@
 
 {% block body %}
 	<div class="galaxy-background" style="background-image:url({{ asset('uploads/images/' ~ star.galaxy.brochureFilename) }}) ">
-		<div class="float-right">
-			<a href="{{ path('star_update', {id: star.id}) }}" class="btn btn-primary">
-				Update
-			</a>
-			<a href="{{ path('star_delete', {id: star.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez la suppression !')">
-				Delete
-			</a>
-		</div>
+
 
 		<div id='stars'></div>
 		<div id='stars2'></div>
 		<div id='stars3'></div>
-
-
-		<h2>
-			{{ star.name }}
-		</h2>
 
 		<div class="container-view">
 
 			<div class="image-view">
 				<img src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" alt="image star">
 			</div>
-			<div class="description-view">
-				<p>
-					{{ star.description }}
-				</p>
+			<div class="right">
+				<div class="description-view">
+
+
+					<h2>
+						{{ star.name }}
+					</h2>
+
+					<p>
+						{{ star.description }}
+					</p>
+
+
+				</div>
+				<div class="float-right">
+					<a href="{{ path('star_update', {id: star.id}) }}" class="btn btn-primary">
+						Update
+					</a>
+					<a href="{{ path('star_delete', {id: star.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez la suppression !')">
+						Delete
+					</a>
+				</div>
 			</div>
+
+
 		</div>
 	</div>
 {% endblock %}

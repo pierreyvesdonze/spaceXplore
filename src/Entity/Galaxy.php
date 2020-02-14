@@ -19,25 +19,21 @@ class Galaxy
 
     /**
      *  @ORM\Column(type="string")
-     * 
      */
     private $name;
 
     /**
-     *  @ORM\Column(type="integer")
-     * 
+     *  @ORM\Column(type="string")
      */
     private $age;
 
     /**
      *  @ORM\Column(type="integer")
-     * 
      */
     private $size;
 
     /**
      *  @ORM\Column(type="string")
-     * 
      */
     private $constellation;
 
@@ -53,7 +49,6 @@ class Galaxy
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Star", mappedBy="galaxy", cascade={"remove"})
-     * 
      */
     private $stars;
 
@@ -157,7 +152,7 @@ class Galaxy
 
     /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -167,7 +162,7 @@ class Galaxy
      * Set the value of description
      *
      * @return  self
-     */ 
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -177,7 +172,7 @@ class Galaxy
 
     /**
      * Get the value of brochureFilename
-     */ 
+     */
     public function getBrochureFilename()
     {
         return $this->brochureFilename;
@@ -187,7 +182,7 @@ class Galaxy
      * Set the value of brochureFilename
      *
      * @return  self
-     */ 
+     */
     public function setBrochureFilename($brochureFilename)
     {
         $this->brochureFilename = $brochureFilename;

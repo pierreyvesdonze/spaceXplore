@@ -7,7 +7,6 @@ use App\Entity\Star;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,15 +31,15 @@ class StarType extends AbstractType
             'name',
             TextType::class,
             [
-                "label" => "Nom de l'étoile"
+                "label" => "Nom de l'objet"
             ]
         );
 
         $builder->add(
             'age',
-            IntegerType::class,
+            TextType::class,
             [
-                "label" => "Âge de l'étoile (en milliards d'années)"
+                "label" => "Âge de l'objet"
             ]
         );
 
@@ -48,7 +47,7 @@ class StarType extends AbstractType
             'type',
             TextType::class,
             [
-                "label" => "Type d'étoile"
+                "label" => "Type d'objet"
             ]
         );
 
@@ -56,7 +55,7 @@ class StarType extends AbstractType
             'masse',
             TextType::class,
             [
-                "label" => "Masse de l'étoile"
+                "label" => "Masse de l'objet"
             ]
         );
 

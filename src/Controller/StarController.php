@@ -48,7 +48,7 @@ class StarController extends AbstractController
         );
 
         return $this->render(
-            'stars/stars_by_galaxy.html.twig',
+            'stars/objects_by_galaxy.html.twig',
             [
                 'stars'   => $stars,
                 'galaxy'  => $galaxy

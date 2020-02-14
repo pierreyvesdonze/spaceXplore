@@ -3,9 +3,9 @@
 {% block body %}
 
 	<div class="float-right">
-		<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter une étoile</a>
+		<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter un objet</a>
 	</div>
-	<h2>Etoiles</h2>
+	<h2>Objets</h2>
 
 	<div class="container-cards">
 		{% for id, star in stars %}
@@ -17,9 +17,8 @@
 				</a>
 
 				<div class="card-body">
-					<h5 class="card-title">{{ star.galaxy.name }}
+					<h5 class="card-title">
 						{{ star.name }}</h5>
-					<p class="card-text">{{ star.age }}</p>
 
 					<a href=" {{ path('star_update', {'id' : star.id}) }} " class="btn btn-primary">Update</a>
 

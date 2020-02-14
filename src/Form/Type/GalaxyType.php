@@ -5,7 +5,6 @@ namespace App\Form\Type;
 use App\Entity\Galaxy;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,9 +26,9 @@ class GalaxyType extends AbstractType
 
         $builder->add(
             'age',
-            IntegerType::class,
+            TextType::class,
             [
-                "label" => "Âge de la galaxie (en milliards d'années)"
+                "label" => "Âge de la galaxie"
             ]
         );
 

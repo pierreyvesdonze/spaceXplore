@@ -6,7 +6,7 @@
 
 		<div class="float-right">
 			{% if is_granted("ROLE_USER") %}
-				<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter une étoile</a>
+				<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter un objet</a>
 			{% endif %}
 		</div>
 
@@ -18,21 +18,23 @@
 
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-				<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+			{% for id, star in stars %}
+				<li data-target="#carousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %} class="active" {% endif %}></li>
+			{% endfor %}
 			</ol>
 
 
 			<!--ITEM-->
 			<div class="carousel-inner">
 				{% for id, star in stars %}
-					<div class="carousel-item active">
+					<div {% if loop.first %} class="carousel-item active" {% else %} class="carousel-item" {% endif %}>
 						<div class="carousel-image">
-							<img src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" class="" alt="star">
+							<a href=" {{ path("star_view", {"id": star.id}) }} ">
+								<img src="{{ asset('uploads/images/' ~ star.brochureFilename) }}" class="" alt="star">
+							</a>
 						</div>
 
-						<div class="carousel-caption ">
+						<div class="carousel-caption carousel-caption-stars ">
 							<h5 class="card-title">
 								{{ star.name }}</h5>
 							<ul>
@@ -41,7 +43,7 @@
 										Âge :
 									</span>
 									{{ star.age }}
-									milliards d'années</li>
+									</li>
 								<li>
 									<span>
 										Type :

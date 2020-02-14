@@ -22,9 +22,8 @@ class Star
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     *  
+     /**
+     * @ORM\Column(type="string", length=255)
      */
     private $age;
 

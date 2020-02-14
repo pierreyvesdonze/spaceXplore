@@ -4,27 +4,25 @@
 
 	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
-			{% for id, galaxy in galaxies %}
-				<li data-target="#carousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %} class="active" {% endif %}></li>
-			{% endfor %}
+			<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+			<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
 		</ol>
 
 		<!--ITEM-->
 		<div class="carousel-inner">
 			{% for id, galaxy in galaxies %}
-				<div {% if loop.first %} class="carousel-item active" {% else %} class="carousel-item" {% endif %}>
+				<div class="carousel-item active">
 					<img src="{{ asset('uploads/images/' ~ galaxy.brochureFilename) }}" class="" alt="galaxy">
 					<div class="carousel-caption carousel-caption-galaxy d-none d-md-block">
 						<h5>{{ galaxy.name }}</h5>
 						<p>{{ galaxy.description }}</p>
-
-						<hr>
-
 						<ul>
 							<li>
-								<span>Âge :
+								<span>Age :
 								</span>
 								{{ galaxy.age }}
+								milliards d'années
 							</li>
 							<li>
 								<span>Diamètre :
