@@ -1,3 +1,7 @@
+<!--***************************
+HEAD
+****************************-->
+
 <!doctype html>
 <html lang="fr">
 	<head>
@@ -16,6 +20,14 @@
 			{% endblock %}
 		</title>
 	</head>
+
+
+
+
+	<!--***************************
+		BODY
+	****************************-->
+
 	<body>
 		<nav class="navbar navbar-expand-lg">
 			<a class="navbar-brand" href="{{ path("homepage") }}">spaceXplore</a>
@@ -59,4 +71,16 @@
 
 		{% block javascripts %}{% endblock %}
 	</body>
+
+
+
+	<!--***************************
+	FOOTER
+	****************************-->
+
+	<div
+		class="footer"><!--&copy; Pierre-Yves Donzé - 2020-->
+	</div>
+
+	{% block footer %}{% endblock %}
 </html>

@@ -47,6 +47,7 @@ class StarController extends AbstractController
             ['galaxy' => $galaxy]
         );
 
+
         return $this->render(
             'stars/objects_by_galaxy.html.twig',
             [
@@ -60,6 +61,7 @@ class StarController extends AbstractController
      * @Route("/view/{id}", name="star_view")
      */
     public function starView(Star $star) {
+
 
         return $this->render('stars/view.html.twig', [
             'star' => $star

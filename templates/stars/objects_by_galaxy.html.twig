@@ -5,6 +5,7 @@
 	<div class="galaxy-background" style="background-image:url({{ asset('uploads/images/' ~ galaxy.brochureFilename) }}) ">
 
 		<div class="float-right">
+		<a href="{{ path('galaxies_list', {id: galaxy.id}) }}" class="btn btn-secondary">Back</a>
 			{% if is_granted("ROLE_USER") %}
 				<a href="{{ path("star_create") }}" class="btn btn-primary">Ajouter un objet</a>
 			{% endif %}
@@ -17,12 +18,6 @@
 
 
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-			{% for id, star in stars %}
-				<li data-target="#carousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %} class="active" {% endif %}></li>
-			{% endfor %}
-			</ol>
-
 
 			<!--ITEM-->
 			<div class="carousel-inner">

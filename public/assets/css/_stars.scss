@@ -39,6 +39,7 @@ STARS ANIMATION
 }
   
   #stars3 {
+    z-index: 5;
     width: 3px;
     height: 3px;
     background: transparent;
@@ -47,6 +48,7 @@ STARS ANIMATION
   }
   #stars3:after {
     content: " ";
+    z-index: 5;
     position: absolute;
     top: 2000px;
     width: 3px;
