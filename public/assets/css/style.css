@@ -23,10 +23,6 @@ html {
   background-color: black;
 }
 
-h2 {
-  margin-left: 25px;
-}
-
 a, li, p, h1, h2, h3 {
   text-shadow: black 1px 1px 3px;
 }
