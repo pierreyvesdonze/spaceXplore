@@ -91,6 +91,9 @@ class StarType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Star::class,
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ],
         ]);
     }
 }

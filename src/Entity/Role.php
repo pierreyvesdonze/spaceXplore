@@ -1,13 +1,14 @@
 <?php
-namespace App\Entity;
 
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
  */
-class Role {
+class Role
+{
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,82 +19,43 @@ class Role {
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $code;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $label;
+    private $roleString;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
+    public function __toString()
+    {
+        return $this->name;
+    }
 
-    /**
-     * Get the value of id
-     */ 
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Get the value of code
-     */ 
-    public function getCode()
+    public function getName(): ?string
     {
-        return $this->code;
+        return $this->name;
     }
 
-    /**
-     * Set the value of code
-     *
-     * @return  self
-     */ 
-    public function setCode($code)
+    public function setName(string $name): self
     {
-        $this->code = $code;
+        $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get the value of label
-     */ 
-    public function getLabel()
+    public function getRoleString(): ?string
     {
-        return $this->label;
+        return $this->roleString;
     }
 
-    /**
-     * Set the value of label
-     *
-     * @return  self
-     */ 
-    public function setLabel($label)
+    public function setRoleString(string $roleString): self
     {
-        $this->label = $label;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of description
-     */ 
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set the value of description
-     *
-     * @return  self
-     */ 
-    public function setDescription($description)
-    {
-        $this->description = $description;
+        $this->roleString = $roleString;
 
         return $this;
     }

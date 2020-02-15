@@ -60,7 +60,7 @@
 					</a>
 
 
-					{% if is_granted("ROLE_USER") %}
+					{% if is_granted("view", star) %}
 						<a href="{{ path('star_update', {id: star.id}) }}" class="btn btn-primary">
 							Update
 						</a>

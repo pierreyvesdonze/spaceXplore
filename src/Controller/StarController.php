@@ -7,6 +7,7 @@ use App\Entity\Galaxy;
 use App\Entity\Star;
 use App\Form\Type\StarType;
 use App\Repository\StarRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +48,6 @@ class StarController extends AbstractController
             ['galaxy' => $galaxy]
         );
 
-
         return $this->render(
             'stars/objects_by_galaxy.html.twig',
             [
@@ -62,6 +62,7 @@ class StarController extends AbstractController
      */
     public function starView(Star $star) {
 
+        //$this->denyAccessUnlessGranted('view', $star);
 
         return $this->render('stars/view.html.twig', [
             'star' => $star
@@ -99,9 +100,11 @@ class StarController extends AbstractController
                     echo("L'image n'a pas été chargée");
                 }
 
-
                 $star->setBrochureFilename($newFilename);
             }
+
+            $star = $form->getData();
+            $star->setAppUser($this->getUser());
 
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($star);
@@ -124,8 +127,10 @@ class StarController extends AbstractController
      * @Route("/{id}/update", name="star_update")
      * @IsGranted("ROLE_USER")
      */
-    public function starUpdate(Request $request, Star $star)
+    public function starUpdate(Request $request, Star $star, UserRepository $userRepository)
     {
+        $this->denyAccessUnlessGranted('edit', $star);
+
         $form = $this->createForm(StarType::class, $star);
         $form->handleRequest($request);
 
@@ -134,7 +139,7 @@ class StarController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->flush();
 
-            $this->addFlash("success", "L'étoile a bien été modifiée");
+            $this->addFlash("success", "L'objet a bien été modifié");
 
             return $this->redirectToRoute('stars_list', ['id' => $star->getId()]);
         }
@@ -153,11 +158,13 @@ class StarController extends AbstractController
      */
     public function starDelete(Star $star)
     {
+        $this->denyAccessUnlessGranted('edit', $star);
+
         $manager = $this->getDoctrine()->getManager();
         $manager->remove($star);
         $manager->flush();
 
-        $this->addFlash("success", "L'étoile a bien été supprimée");
+        $this->addFlash("success", "L'objet a bien été supprimé");
 
         return $this->redirectToRoute('stars_list');
     }

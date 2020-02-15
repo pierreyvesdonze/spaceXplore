@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -27,18 +28,9 @@ class AppUser implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\Length(max=100)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=25, unique=true)
      */
-    private $firstName;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\Length(max=100)
-     * @Assert\NotBlank
-     */
-    private $lastName;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=180)
@@ -56,16 +48,27 @@ class AppUser implements UserInterface
      */
     private $password;
 
-
-   /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role")
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Role")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $roles;
+    private $role;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Star", mappedBy="appUser", orphanRemoval=true)
+     */
+    private $stars;
 
     public function __construct()
     {
-        $this->roles = new ArrayCollection();
+        $this->stars = new ArrayCollection();
     }
+
+    public function __toString()
+    {
+        return $this->username;
+    }
+
 
     /**
      * Get the value of email
@@ -107,42 +110,14 @@ class AppUser implements UserInterface
         return $this;
     }
 
-    /**
-     * Get the value of firstName
-     */
-    public function getFirstName()
+    public function getUsername(): ?string
     {
-        return $this->firstName;
+        return $this->username;
     }
 
-    /**
-     * Set the value of firstName
-     *
-     * @return  self
-     */
-    public function setFirstName($firstName)
+    public function setUsername(string $username): self
     {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of lastName
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * Set the value of lastName
-     *
-     * @return  self
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
+        $this->username = $username;
 
         return $this;
     }
@@ -155,35 +130,29 @@ class AppUser implements UserInterface
         return $this->id;
     }
 
-      /**
+    /**
      * Get the value of roles
      */
     public function getRolesCollection()
     {
         return $this->roles;
     }
-    /**
-     * Get the value of roles
-     */
+
     public function getRoles()
     {
-        $roleCodes = array();
-
-        foreach($this->roles as $role) {
-            $roleCodes[] = $role->getCode();
-        }
-        // symfo voudrai recevoir un truc du genre ['ROLE_USER', ROLE_TRUC ....]
-        return $roleCodes;
+        return array($this->getRole()->getRoleString());
     }
 
-    public function setRoles(array $roles) {
-
-        $this->roles = $roles;
-    }
-
-    public function getUsername()
+    public function getRole(): ?Role
     {
-        return $this->email;
+        return $this->role;
+    }
+
+    public function setRole(?Role $role): self
+    {
+        $this->role = $role;
+
+        return $this;
     }
 
     // bcrypt n'utilise pas de sel
@@ -194,5 +163,60 @@ class AppUser implements UserInterface
     // Aucune donnée sensible dans notre objet User donc on laisse vide
     public function eraseCredentials()
     {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    /**
+     * @return Collection|Star[]
+     */
+    public function getStars(): Collection
+    {
+        return $this->stars;
+    }
+
+    public function addStar(Star $star): self
+    {
+        if (!$this->stars->contains($star)) {
+            $this->stars[] = $star;
+            $star->setAppUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStar(Star $star): self
+    {
+        if ($this->stars->contains($star)) {
+            $this->stars->removeElement($star);
+            // set the owning side to null (unless already changed)
+            if ($star->getAppUser() === $this) {
+                $star->setAppUser(null);
+            }
+        }
+
+        return $this;
     }
 }
