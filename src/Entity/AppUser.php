@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -56,10 +57,15 @@ class AppUser implements UserInterface
     private $password;
 
 
-    /**
-     * @ORM\Column(type="json")
+   /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role")
      */
-    private $roles = [];
+    private $roles;
+
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
 
     /**
      * Get the value of email
@@ -149,19 +155,25 @@ class AppUser implements UserInterface
         return $this->id;
     }
 
+      /**
+     * Get the value of roles
+     */
+    public function getRolesCollection()
+    {
+        return $this->roles;
+    }
     /**
      * Get the value of roles
      */
     public function getRoles()
     {
-        // on recupère les roles qui sont en BDD
-        $roles = $this->roles;
+        $roleCodes = array();
 
-        // on y ajoute le role "standard" d'un utilisateur connecté 'ROLE_USER'
-        $roles[] = 'ROLE_USER';
-
-        // on renvoi l'ensemble a celui qui demande
-        return array_unique($roles);
+        foreach($this->roles as $role) {
+            $roleCodes[] = $role->getCode();
+        }
+        // symfo voudrai recevoir un truc du genre ['ROLE_USER', ROLE_TRUC ....]
+        return $roleCodes;
     }
 
     public function setRoles(array $roles) {
