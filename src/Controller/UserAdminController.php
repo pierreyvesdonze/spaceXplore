@@ -23,6 +23,9 @@ class UserAdminController extends AbstractController {
     public function edit(Request $request, AppUser $appUser): Response
     {
         $form = $this->createForm(AppUserAdminType::class, $appUser);
+
+        $this->denyAccessUnlessGranted('edit', $appUser);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

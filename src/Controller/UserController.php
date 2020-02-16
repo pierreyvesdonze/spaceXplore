@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\AppUser;
 use App\Form\AppUserType;
+use App\Repository\RoleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,13 +15,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/user")
  */
-class UserController extends AbstractController
+class UserController extends AbstractController 
 {
 
     /**
      * @Route("/new", name="app_user_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function new(Request $request, UserPasswordEncoderInterface $encoder, RoleRepository $roleRepository): Response
     {
         $appUser = new AppUser();
         $form = $this->createForm(AppUserType::class, $appUser);
@@ -33,9 +34,14 @@ class UserController extends AbstractController
 
             $appUser->setPassword($encodedPassword);
 
+            $role = $roleRepository->findOneByRoleString('ROLE_USER');
+            $appUser->setRole($role);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($appUser);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Vous êtes enregistré. Vous pouvez maintenant vous connecter.');
 
             return $this->redirectToRoute('app_login');
         }

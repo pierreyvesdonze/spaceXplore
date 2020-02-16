@@ -22,9 +22,8 @@ class Star
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     *  
+     /**
+     * @ORM\Column(type="string", length=255)
      */
     private $age;
 
@@ -43,7 +42,6 @@ class Star
      */
     private $description;
 
-    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Galaxy", inversedBy="stars")
      *  @ORM\OrderBy({"title" = "ASC"})
@@ -54,6 +52,12 @@ class Star
      * @ORM\Column(type="string")
      */
     private $brochureFilename;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\AppUser", inversedBy="stars")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $appUser;
 
 
     public function getId(): ?int
@@ -181,6 +185,18 @@ class Star
     public function setMasse($masse)
     {
         $this->masse = $masse;
+
+        return $this;
+    }
+
+    public function getAppUser(): ?appUser
+    {
+        return $this->appUser;
+    }
+
+    public function setAppUser(?appUser $appUser): self
+    {
+        $this->appUser = $appUser;
 
         return $this;
     }

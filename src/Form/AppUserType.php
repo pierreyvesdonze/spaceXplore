@@ -16,8 +16,7 @@ class AppUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
+            ->add('username')
             ->add('email', EmailType::class)
             ->add('plain_password', PasswordType::class, [
                 "mapped" => false,

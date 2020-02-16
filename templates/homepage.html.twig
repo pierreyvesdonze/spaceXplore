@@ -2,11 +2,12 @@
 
 {% block body %}
 
-    <div class="jumbotron">
-        <h1 class="display-4">Bienvenue dans l'espace!</h1>
+	<div class="jumbotron">
+		<h1 class="display-4">Bienvenue dans l'espace!</h1>
+		<hr class="my-4">
+		<p>Explorez l'espace et commencez à y ajouter des objets !</p>
         <hr class="my-4">
-        <p>Pour commencer vous pouvez parcourir la liste des galaxies</p>
-        <a class="btn btn-primary" href="{{ path('galaxies_list') }}" role="button">Explorez l'espace</a>
-    </div>
+		<a class="btn btn-primary" href="{{ path('galaxies_list') }}" role="button">Explorer</a>
+	</div>
 
 {% endblock %}
