@@ -28,5 +28,6 @@ security:
                 target: app_login
                 # where to redirect after logout
                 # target: app_any_route
-    #access_control:
-        #- { path: '^/admin', roles: ROLE_ADMIN }
+    access_control:
+        - { path: '^/admin', roles: ROLE_ADMIN }
+        - { path: '^/.*', roles: ROLE_USER }

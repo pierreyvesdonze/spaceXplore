@@ -17,11 +17,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalaxyController extends AbstractController
 {
 
+    public function index()
+    {
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $adminEmail = $this->getParameter('app.admin_email');
+
+        // ...
+    }
+
     /**
-     * @Route("/list", name="galaxies_list")
+     * @Route("/list", name="galaxies_list", methods={"GET","POST"})
      */
     public function galaxiesList()
     {
+        
 
         $galaxiesRepository = $this->getDoctrine()->getRepository(Galaxy::class);
         $galaxies = $galaxiesRepository->findAll();
@@ -35,7 +44,7 @@ class GalaxyController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="galaxy_create")
+     * @Route("/create", name="galaxy_create", methods={"GET","POST"})
      * @IsGranted("ROLE_DB_ADMIN")
      */
     public function galaxyCreate(Request $request)
@@ -87,7 +96,7 @@ class GalaxyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="galaxy_delete")
+     * @Route("/{id}/delete", name="galaxy_delete", methods={"GET","POST"})
      * @IsGranted("ROLE_DB_ADMIN")
      * 
      */

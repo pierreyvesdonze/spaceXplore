@@ -20,8 +20,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class StarController extends AbstractController
 {
 
+    public function index()
+    {
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $adminEmail = $this->getParameter('app.admin_email');
+
+        // ...
+    }
+
     /**
-     * @Route("/list", name="stars_list")
+     * @Route("/list", name="stars_list", methods={"GET","POST"})
      */
     public function starsList()
     {
@@ -38,7 +46,7 @@ class StarController extends AbstractController
     }
 
      /**
-     * @Route("/galaxy/{id}/list", name="galaxy_stars_list")
+     * @Route("/galaxy/{id}/list", name="galaxy_stars_list", methods={"GET","POST"})
      */
     public function starsListBygalaxy(Galaxy $galaxy)
     {
@@ -58,7 +66,7 @@ class StarController extends AbstractController
     }
 
        /**
-     * @Route("/view/{id}", name="star_view")
+     * @Route("/view/{id}", name="star_view", methods={"GET","POST"})
      */
     public function starView(Star $star) {
 
@@ -70,7 +78,7 @@ class StarController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="star_create")
+     * @Route("/create", name="star_create", methods={"GET","POST"})
      * @IsGranted("ROLE_USER")
      */
     public function starCreate(Request $request)
@@ -86,7 +94,7 @@ class StarController extends AbstractController
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $safeFilename = $originalFilename;
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $brochureFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
@@ -124,7 +132,7 @@ class StarController extends AbstractController
     }
 
      /**
-     * @Route("/{id}/update", name="star_update")
+     * @Route("/{id}/update", name="star_update", methods={"GET","POST"})
      * @IsGranted("ROLE_USER")
      */
     public function starUpdate(Request $request, Star $star, UserRepository $userRepository)
@@ -153,7 +161,7 @@ class StarController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="star_delete")
+     * @Route("/{id}/delete", name="star_delete", methods={"GET","POST"})
      * @IsGranted("ROLE_USER")
      */
     public function starDelete(Star $star)

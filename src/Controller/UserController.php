@@ -18,6 +18,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController 
 {
 
+    public function index()
+    {
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $adminEmail = $this->getParameter('app.admin_email');
+
+        // ...
+    }
+
     /**
      * @Route("/new", name="app_user_new", methods={"GET","POST"})
      */

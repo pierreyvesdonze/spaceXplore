@@ -9,6 +9,15 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+
+    public function index()
+    {
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $adminEmail = $this->getParameter('app.admin_email');
+
+        // ...
+    }
+    
     /**
      * @Route("/login", name="app_login")
      */
