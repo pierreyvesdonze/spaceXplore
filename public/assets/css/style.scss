@@ -24,6 +24,16 @@ HEADER
   align-self: flex-end;
 }
 
+.navbar-toggler {
+  background-color: white;
+}
+
+.navbar-toggler-icon {
+  background-color: black;
+  border-radius: 20%;
+}
+
+
 /*
 ***********************************
 HOME
@@ -40,8 +50,33 @@ GALAXY & STARS
 ***********************************
 */
 
+.carousel-galaxy {
+  height: 90vh;
+
+}
+
+.carousel-inner {
+  overflow: visible;
+}
+
+
+.carousel-item, .carousel-item .active {
+  height: 80vh;
+  overflow: auto;
+
+  
+  @include sm {
+    height: 100vh !important;
+  }
+
+  @include xs {
+    height: 100vh !important;
+  }
+}
+
 .carousel-item img {
   width: 100%;
+
 }
 
 .carousel-caption {
@@ -52,6 +87,14 @@ GALAXY & STARS
   backdrop-filter: blur(8px) !important;
   border-radius: 1em;
   padding: 1em;
+
+  @include sm {
+    display: block !important;
+  }
+
+  @include xs {
+    display: block !important;
+  }
 }
 
 .carousel-caption p {

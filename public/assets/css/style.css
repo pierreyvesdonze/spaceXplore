@@ -17,7 +17,7 @@ COLORS
 }
 
 /*G E N E R A L S*/
-html {
+html, body {
   height: 100%;
   overflow: hidden;
   background-color: black;
@@ -243,6 +243,15 @@ HEADER
       align-self: flex-end;
 }
 
+.navbar-toggler {
+  background-color: white;
+}
+
+.navbar-toggler-icon {
+  background-color: black;
+  border-radius: 20%;
+}
+
 /*
 ***********************************
 HOME
@@ -257,6 +266,31 @@ HOME
 GALAXY & STARS
 ***********************************
 */
+.carousel-galaxy {
+  height: 90vh;
+}
+
+.carousel-inner {
+  overflow: visible;
+}
+
+.carousel-item, .carousel-item .active {
+  height: 80vh;
+  overflow: auto;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .carousel-item, .carousel-item .active {
+    height: 100vh !important;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .carousel-item, .carousel-item .active {
+    height: 100vh !important;
+  }
+}
+
 .carousel-item img {
   width: 100%;
 }
@@ -273,6 +307,18 @@ GALAXY & STARS
           backdrop-filter: blur(8px) !important;
   border-radius: 1em;
   padding: 1em;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .carousel-caption {
+    display: block !important;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .carousel-caption {
+    display: block !important;
+  }
 }
 
 .carousel-caption p {

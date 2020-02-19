@@ -69,7 +69,7 @@ class StarType extends AbstractType
 
         $builder->add('brochure', FileType::class, [
           
-            'label'         => 'Ajouter une image (JPG)',
+            'label'         => 'Ajouter une image (PNG détourée)',
             'mapped'        => false,
             'required'      => true,
             'constraints'   => [

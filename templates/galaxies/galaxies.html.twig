@@ -2,19 +2,14 @@
 
 {% block body %}
 
-	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			{% for id, galaxy in galaxies %}
-				<li data-target="#carousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %} class="active" {% endif %}></li>
-			{% endfor %}
-		</ol>
+	<div id="carouselExampleCaptions" class="carousel slide carousel-galaxy" data-ride="carousel">
 
 		<!--ITEM-->
 		<div class="carousel-inner">
 			{% for id, galaxy in galaxies %}
 				<div {% if loop.first %} class="carousel-item active" {% else %} class="carousel-item" {% endif %}>
 					<img src="{{ asset('uploads/images/' ~ galaxy.brochureFilename) }}" class="" alt="galaxy">
-					<div class="carousel-caption carousel-caption-galaxy d-none d-md-block">
+					<div class="carousel-caption carousel-caption-galaxy d-md-block">
 						<h5>{{ galaxy.name }}</h5>
 						<p>{{ galaxy.description }}</p>
 
